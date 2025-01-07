@@ -44,7 +44,11 @@ public class AntColony
 			{
 				prev = curr; //keep track of the previous guy (who we will exit to)
 
-				curr = new Place("tunnel["+tunnel+"-"+step+"]", prev); //create new place with an exit that is the previous spot
+				if (step % moatFrequency == 0 && moatFrequency != 0) {
+					curr = new Water("tunnel["+tunnel+"-"+step+"]", prev);
+				} else {
+					curr = new Place("tunnel["+tunnel+"-"+step+"]", prev); //create new place with an exit that is the previous spot
+				}
 
 				prev.setEntrance(curr); //the previous person's entrance is the new spot
 				places.add(curr); //add new place to the list
@@ -116,6 +120,11 @@ public class AntColony
 	 */
 	public void deployAnt(Place place, Ant ant)
 	{
+		if (place instanceof Water) {
+			System.out.println("Cannot deploy ant in water");
+			return;
+		};
+
 		if(this.food >= ant.getFoodCost())
 		{
 			this.food -= ant.getFoodCost();

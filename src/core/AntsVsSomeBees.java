@@ -7,7 +7,7 @@ public class AntsVsSomeBees
 {
 	public static void main(String[] args)
 	{
-		AntColony colony = new AntColony(1, 8, 0, 10); //specify the colony ]tunnels, length, moats, food]
+		AntColony colony = new AntColony(4, 8, 3, 10); //specify the colony ]tunnels, length, moats, food]
 		Hive hive = Hive.makeTestHive(); //specify the attackers (the hive)
 		new AntGame(colony,hive); //launch the game
 	}
