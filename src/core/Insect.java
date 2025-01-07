@@ -9,6 +9,7 @@ public abstract class Insect
 {
 	protected int armor; //insect's current armor
 	protected Place place; //insect's current location
+	protected boolean watersafe;
 	
 	/**
 	 * Creates a new Insect with the given armor in the given location
@@ -21,6 +22,7 @@ public abstract class Insect
 			throw new IllegalArgumentException("Cannot create an insect with armor of 0");
 		this.armor = armor;
 		this.place = place;
+		this.watersafe = false;
 	}
 	
 	/**
@@ -57,6 +59,15 @@ public abstract class Insect
 	public int getArmor()
 	{
 		return this.armor;
+	}
+
+	/**
+	 * Returns whether the insect is watersafe or not
+	 * @returns whether the insect is watersafe or not
+	 */
+	public boolean getWatersafe() 
+	{
+		return this.watersafe;
 	}
 	
 	/**
