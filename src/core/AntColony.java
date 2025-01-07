@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import ants.ScubaThrowerAnt;
+
 /**
  * An entire colony of ants and their tunnels.
  * @author Joel
@@ -120,7 +122,7 @@ public class AntColony
 	 */
 	public void deployAnt(Place place, Ant ant)
 	{
-		if (place instanceof Water) {
+		if (place instanceof Water && !ant.watersafe) {
 			System.out.println("Cannot deploy ant in water");
 			return;
 		};
