@@ -2,8 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import ants.ScubaThrowerAnt;
-
 /**
  * An entire colony of ants and their tunnels.
  * @author Joel
