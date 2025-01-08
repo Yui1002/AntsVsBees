@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import ants.BodyguardAnt;
+
 /**
  * Represents a location in the game
  * @author Joel
@@ -116,13 +118,30 @@ public class Place
 	 */
 	public void addInsect(Ant ant)
 	{
-		if(this.ant == null)
-		{
-			this.ant = ant;
-			ant.setPlace(this);
+		// ant currently occupying the place => this.getAnt()
+		//Scenario #1
+		if (this.getAnt() instanceof Containing) {
+			//check can add
+			boolean canAdd = ((Containing)ant).add(ant);
+			if(!canAdd) {
+				System.out.println("The insect was not successfully added");
+			}
 		}
-		else
-			System.out.println("Already an ant in "+this); //report error
+
+		//Scenario #2
+		if (ant instanceof Containing) {
+			boolean didAdd = ((Containing)ant).add(this.getAnt());
+			if (!didAdd) {
+				System.out.println("The insect was not successfully added");
+			} else {
+				this.ant = ant;
+				ant.setPlace(this);
+			}
+		}
+
+		if (!(this.getAnt() instanceof Containing) && !(ant instanceof Containing)) {
+			System.out.println("The insect was not successfully added");
+		}
 	}
 
 	/**
@@ -141,13 +160,19 @@ public class Place
 	 */
 	public void removeInsect(Ant ant)
 	{
-		if(this.ant == ant)
-		{
-			this.ant = null;
-			ant.setPlace(null);
+		if (ant instanceof Containing) {
+			// scenario#2 if ant is Containing, remove container and inside ant is put in the place
+			boolean didRemove = ((Containing)ant).remove();
+			if (!didRemove) {
+				System.out.println("The insect was not successfully removed");
+			} else {
+				this.ant = this.getAnt();
+				ant.setPlace(this);
+			}
+		} else {
+			// scenario#1 if ant is inside the Containing, it is removed 
+			((Containing)ant).remove();
 		}
-		else
-			System.out.println(ant + " is not in "+this);
 	}
 	
 	/**

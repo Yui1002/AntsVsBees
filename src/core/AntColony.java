@@ -151,8 +151,10 @@ public class AntColony
 	public ArrayList<Ant> getAllAnts()
 	{
 		ArrayList<Ant> ants = new ArrayList<Ant>();
+		System.out.println("places are " + places);
 		for(Place p : places)
 		{
+			System.out.println("get ant " + p.getAnt());
 			if(p.getAnt() != null)
 				ants.add(p.getAnt());
 		}

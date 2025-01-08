@@ -1,11 +1,5 @@
 package core;
 
-interface Containing {
-    public boolean add(Insect insect);
-    public boolean remove(Insect insect);
-    public Insect get();
-}
-
 /**
  * A class representing a basic Ant
  * 
