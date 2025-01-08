@@ -122,7 +122,7 @@ public class AntColony
 	 */
 	public void deployAnt(Place place, Ant ant)
 	{
-		if (place instanceof Water && !ant.watersafe) {
+		if (place instanceof Water && !ant.getWatersafe()) {
 			System.out.println("Cannot deploy ant in water");
 			return;
 		};
