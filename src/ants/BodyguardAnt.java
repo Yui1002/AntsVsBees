@@ -14,17 +14,20 @@ public class BodyguardAnt extends Ant implements Containing{
         this.foodCost = 4;
         this.antContaind = null;
     }
-
+ 
     @Override
     public void action(AntColony colony) {
         // get antContained
         // if there is no antContained, do nothing
         if (this.antContaind == null) return;
-
+        
         // as long as armor is more than 0, it can shield contained ant
         // otherwise contained ant performs
         if (this.armor <= 0) {
             this.antContaind.action(colony);
+        } else {
+            // blocks bee's movement (shield)
+            this.setDoesAntBlocks(true);
         }
     }
 

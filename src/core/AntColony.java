@@ -160,6 +160,7 @@ public class AntColony
 					if (containedAnt == null) {
 						ants.add(curAnt);
 					} else {
+						ants.add(curAnt);
 						ants.add((Ant)containedAnt);
 					}
 				} else {
@@ -167,7 +168,6 @@ public class AntColony
 				}
 			}
 		}
-		System.out.println("all ants are " + ants);
 		return ants;
 	}
 	
