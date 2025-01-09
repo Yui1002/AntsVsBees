@@ -33,6 +33,11 @@ public abstract class Ant extends Insect
 	{
 		return doesAntBlocks;
 	}
+
+	public void setDoesAntBlocks(boolean doesAntBlocks)
+	{
+		this.doesAntBlocks = doesAntBlocks;
+	}
 	
 	/**
 	 * Removes the ant from its current place

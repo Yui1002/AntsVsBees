@@ -2,8 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import ants.ScubaThrowerAnt;
-
 /**
  * An entire colony of ants and their tunnels.
  * @author Joel
@@ -155,8 +153,20 @@ public class AntColony
 		ArrayList<Ant> ants = new ArrayList<Ant>();
 		for(Place p : places)
 		{
-			if(p.getAnt() != null)
-				ants.add(p.getAnt());
+			Ant curAnt = p.getAnt();
+			if (curAnt != null) {
+				if (curAnt instanceof Containing) {
+					Insect containedAnt = ((Containing) curAnt).get();
+					if (containedAnt == null) {
+						ants.add(curAnt);
+					} else {
+						ants.add(curAnt);
+						ants.add((Ant)containedAnt);
+					}
+				} else {
+					ants.add(curAnt);
+				}
+			}
 		}
 		return ants;
 	}

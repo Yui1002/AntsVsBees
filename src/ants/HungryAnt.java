@@ -22,7 +22,10 @@ public class HungryAnt extends Ant {
         } else {
             ArrayList<Bee> bees = colony.getAllBees();
             if (!bees.isEmpty()) {
-                int random = (int)(Math.random() * (bees.size() -1)) + 1;
+                int max = bees.size();
+                int min = 0;
+                int range = max - min + 1;
+                int random = (int)(Math.random() * range) + min;
                 Bee bee = bees.get(random);
                 bee.reduceArmor(bee.getArmor());
                 this.digestingTime = 4;

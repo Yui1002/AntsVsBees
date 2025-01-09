@@ -116,13 +116,38 @@ public class Place
 	 */
 	public void addInsect(Ant ant)
 	{
-		if(this.ant == null)
-		{
+		Ant occupyingAnt = this.getAnt();
+		String errMsg = "The insect cannot be added";
+		
+		// scenario#1
+		// if ant occupying the place is a Containing
+		if (occupyingAnt instanceof Containing) {
+			// add new ant to Containing
+			boolean canAdd = ((Containing)occupyingAnt).add(ant);
+			if (!canAdd) {
+				// scenario#3
+				System.out.println(errMsg);
+			}
+		} 
+
+		// scenario#2
+		// if ant to add is a Containing
+		if (ant instanceof Containing) {
+			boolean canAdd = ((Containing)ant).add(occupyingAnt);
+			if (!canAdd) {
+				// scenario#3
+				System.out.println(errMsg);
+			} else {
+				this.ant = ant;
+				ant.setPlace(this);
+			}
+		}
+
+		if (!(occupyingAnt instanceof Containing) && !(ant instanceof Containing)) {
+			System.out.println(errMsg);
 			this.ant = ant;
 			ant.setPlace(this);
 		}
-		else
-			System.out.println("Already an ant in "+this); //report error
 	}
 
 	/**
@@ -141,13 +166,21 @@ public class Place
 	 */
 	public void removeInsect(Ant ant)
 	{
-		if(this.ant == ant)
-		{
-			this.ant = null;
-			ant.setPlace(null);
+		//scenario#2
+		// if ant removed is Containing
+		if (ant instanceof Containing) {
+			boolean canRemove = ((Containing)ant).remove();
+			if (!canRemove) {
+				System.out.println("The insect cannot be removed");
+			} else {
+				this.ant = this.getAnt();
+				ant.setPlace(this);
+			}
+		} else {
+			//scenario#1 
+			// if ant removed is inside Containing, remove ant from container
+			((Containing)ant).remove();
 		}
-		else
-			System.out.println(ant + " is not in "+this);
 	}
 	
 	/**
