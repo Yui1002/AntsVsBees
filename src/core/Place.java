@@ -127,6 +127,9 @@ public class Place
 			if (!canAdd) {
 				// scenario#3
 				System.out.println(errMsg);
+			} else {
+				this.ant = occupyingAnt;
+				ant.setPlace(this);
 			}
 		} 
 
@@ -166,20 +169,24 @@ public class Place
 	 */
 	public void removeInsect(Ant ant)
 	{
-		//scenario#2
-		// if ant removed is Containing
+		// scenario#2
+		// ant removed is Containing
 		if (ant instanceof Containing) {
+			// check if there is ant inside
+			Ant containedAnt = (Ant)((Containing)ant).get();
 			boolean canRemove = ((Containing)ant).remove();
 			if (!canRemove) {
 				System.out.println("The insect cannot be removed");
 			} else {
-				this.ant = this.getAnt();
+				this.ant = containedAnt;
 				ant.setPlace(this);
 			}
 		} else {
-			//scenario#1 
-			// if ant removed is inside Containing, remove ant from container
+			// scenario#1
+			// ant removed is inside Containing
 			((Containing)ant).remove();
+			this.ant = this.getAnt();
+			ant.setPlace(this);
 		}
 	}
 	
